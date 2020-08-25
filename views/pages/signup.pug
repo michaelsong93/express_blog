@@ -1,0 +1,59 @@
+extends ../layout
+
+block title
+    title signup
+
+block content
+    h2 Sign Up
+
+    form(method='post' action='/signup')
+        div
+            label Email: 
+            input(type='email' name='email')
+        br
+        
+        div
+            label Password: 
+            input(type='password' name='password')
+        br
+        
+        div
+            label Password Confirmation: 
+            input(type='password_confirmation' name='password_confirmation')
+        br
+        
+        div
+            label Phone Number: 
+            input(type='phone_number' name='phone_number')
+        br
+        
+        div
+            label First Name: 
+            input(type='first_name' name='first_name')
+        br
+        
+        div
+            label Last Name: 
+            input(type='last_name' name='last_name')
+        br
+        
+        div
+            label Birth Date
+        div
+            label Month: 
+            input(type='month' name='month')
+        br
+        
+        div
+            label Day: 
+            input(type='day' name='day')
+        br
+        
+        div
+            label Year: 
+            input(type='year' name='year')
+        br
+        
+        button(onclick = 'checkSignup()') submit
+    script.
+        function checkSignup

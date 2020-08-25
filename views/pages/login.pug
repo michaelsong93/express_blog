@@ -1,0 +1,27 @@
+extends ../layout
+
+block title
+	title login
+
+block content
+	h2 Login
+
+	form(method='post' action='/login')
+		div
+			label Email: 
+			input(type='email' name='email' placeholder='username')
+		br
+
+		div
+			label Password: 
+			input(type='password' name='password' placeholder='password')
+		br
+
+		button(onclick = 'checkLogin()') submit
+		
+		button sign up
+	script.
+		function checkLogin
+
+
+
