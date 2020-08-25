@@ -6,22 +6,65 @@ block title
 block content
 	h2 Login
 
-	form(method='post' action='/login')
+	form#loginForm(method='post' action='/login')
 		div
 			label Email: 
-			input(type='email' name='email' placeholder='username')
+			input#email(type='email' name='email' placeholder='username')
 		br
 
 		div
 			label Password: 
-			input(type='password' name='password' placeholder='password')
+			input#password(type='password' name='password' placeholder='password')
 		br
 
-		button(onclick = 'checkLogin()') submit
-		
-		button sign up
+		button.btn.btn-primary submit
+		a.btn.btn-primary(href='/signup') sign up 
+		//-button.btn.btn-primary() sign up
 	script.
-		function checkLogin
+		$(function(){
+			const $email = $('#email');
+			const $password = $('#password');
+
+			$('#loginForm').on('submit', function(e){
+				e.preventDefault();
+				const email = $email.val();
+				const email_regex = /^[^@\s]+@[^@\s.]+.[A-Za-z]{2,3}$/;
+
+				const password = $password.val();
+				const password_regex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\*\.\!\@\$]).{8,}$/;
+
+				if(!email || !email_regex.test(email)) return alert("email error");
+				if(!password || !password_regex.test(password)) return alert("password error");
+				
+				this.submit();
+
+				//- 1.
+				//- let message = '';
+				//- if(!email){
+				//- 	message += "email error";
+				//- }
+				//- if()
+
+				//- 2.
+				//- if(!email || !password){
+				//- 	message += 'email & password';
+				//- 	return alert(message);
+				//- }
+				//- else{
+				//- 	this.submit();
+				//- }
+			})
+		})
+
+		//- const checkLogin = () => { //this X
+		//- const email = document.forms["form"]["email"].value;
+		//- const password = document.forms["form"]["password"].value;
+		
+		//- const email_regex = /^[^@\s]+@[^@\s.]+.[A-Za-z]{2,3}$/;
+		//- const password_regex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\*\.\!\@\$]).{8,}$/;
+		//- }
+		//- $(function()){
+		//- })
 
 
 

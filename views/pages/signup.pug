@@ -6,54 +6,83 @@ block title
 block content
     h2 Sign Up
 
-    form(method='post' action='/signup')
+    form#signupForm(method='post' action='/signup')
         div
             label Email: 
-            input(type='email' name='email')
+            input#email(type='email' name='email')
         br
-        
+
         div
             label Password: 
-            input(type='password' name='password')
+            input#password(type='password' name='password')
         br
-        
+
         div
             label Password Confirmation: 
-            input(type='password_confirmation' name='password_confirmation')
+            input#password_confirmation(type='password')
         br
-        
-        div
-            label Phone Number: 
-            input(type='phone_number' name='phone_number')
-        br
-        
+
         div
             label First Name: 
-            input(type='first_name' name='first_name')
+            input#first_name(type='text' name='first_name')
         br
-        
+
         div
             label Last Name: 
-            input(type='last_name' name='last_name')
+            input#last_name(type='text' name='last_name')
         br
-        
+
         div
-            label Birth Date
-        div
-            label Month: 
-            input(type='month' name='month')
+            label Birth Date: 
+            input#birth_date(type='date' name='date')
         br
-        
-        div
-            label Day: 
-            input(type='day' name='day')
-        br
-        
-        div
-            label Year: 
-            input(type='year' name='year')
-        br
-        
-        button(onclick = 'checkSignup()') submit
+
+        button.btn.btn-primary submit
     script.
-        function checkSignup
+        $(function(){
+            const $email = $('#email');
+            const $password = $('#password');
+            const $password_confirmation = $('#password_confirmation');
+            const $first_name = $('#first_name');
+            const $last_name = $('#last_name');
+            const $birth_date = $('#birth_date');
+
+            $('#signupForm').on('submit', function(e){
+                e.preventDefault();
+                const email = $email.val();
+                const email_regex = /^[^@\s]+@[^@\s.]+.[A-Za-z]{2,3}$/;
+
+                const password = $password.val();
+                const password_confirmation = $password_confirmation.val();
+                const password_regex = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[\*\.\!\@\$]).{8,}$/;
+
+                const first_name = $first_name.val();
+                const last_name = $last_name.val();
+                const fname_regex = /^[A-Z][a-z]+$/;
+                const lname_regex = /^[A-Z][a-z]+$/;
+
+                //const birth_date = $birth_date.val();
+                //- const day = birth_date.getDate();
+                //- const month = birth_date.getMonth()+1;
+                //- const year = birth_date.getFullYear();
+
+                let message = '';
+                if(!email || !email_regex.test(email)){
+                    message += "email error\n";
+                } 
+                if(!password || !password_regex.test(password)){
+                    message += "password error\n";
+                }
+                if(!password_confirmation || password != password_confirmation){
+                    message += "password confirmation error\n";
+                }
+                if(!first_name || !fname_regex.test(first_name)){
+                    message += "First name error\n";
+                }
+                if(!last_name || !lname_regex.test(last_name)){
+                    message += "last name error\n";
+                }
+                if(message) return alert(message);            
+                this.submit();
+            })
+        })

@@ -34,6 +34,8 @@ Object.keys(db).forEach(modelName => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-sequelize.sync();
+
+//sync --> datebase 랑 동기화
+//sequelize.sync({force : true});
 
 module.exports = db;
