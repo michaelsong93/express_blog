@@ -1,5 +1,6 @@
 const models = require('../models');
 const passport = require('passport');
+    localStrategy = require('passport-local').Strategy;
 
 exports.getLogin = function(req, res, next){
     res.render('pages/login');
@@ -8,7 +9,7 @@ exports.getLogin = function(req, res, next){
 exports.login = passport.authenticate('local', {
     successRedirect : '/index',
     failureRedirect : '/login',
-})
+});
 
 
 // exports.login = async function(req, res, next){
