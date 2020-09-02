@@ -29,6 +29,15 @@ module.exports = (sequelize, DataTypes) => {
             type : DataTypes.DATE,
             allowNull : false
         },
+        name : {
+            type : DataTypes.VIRTUAL,
+            get(){
+                return this.first_name +' '+ this.last_name
+            },  
+            set(value){
+                throw new Error('cannot set name!');
+            }
+        }
 
     })
 

@@ -6,6 +6,7 @@ const passport = require('passport');
 const passportConfig = require('./passport');
 const session = require("express-session");
 const flash = require("connect-flash");
+const moment = require('moment');
 
 module.exports = (app) => {
     app.use(logger('dev'));
@@ -19,8 +20,12 @@ module.exports = (app) => {
         saveUninitialized: true
     }))
     app.use(flash());
+    app.use(passport.initialize());
+    app.use(passport.session());
     passportConfig(passport);
     app.use(function(req,res,next){
+        res.locals.currentUser = req.user;
+        res.locals.moment = moment;
         res.locals.flashMessages = req.flash();
         next();
     })

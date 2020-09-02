@@ -1,0 +1,38 @@
+extends ../../layout
+
+block title
+  title Home
+
+block content
+  h2 Articles
+  br
+  
+  a.btn.btn-primary(href='/articles/new') Create
+  //- button.btn.btn-primary Edit
+  //- button.btn.btn-primary Delete
+
+  table.table.table-hover
+    thead
+      tr
+        th ID
+        th author
+        th title
+        th date
+        th description
+    tbody
+      each article in articles
+        tr.clickable-row(url=`/articles/${article.id}`)
+          td=article.id
+          td=article.User.name
+          td=article.title
+          td=moment(article.createdAt).format("MMM Do YY")
+          td=article.content
+  script.
+    $(function(){
+      $('.clickable-row').click(function(){
+        const url = $(this).attr('url');
+        window.location = url;
+      })
+    })
+    
+    

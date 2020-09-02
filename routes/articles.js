@@ -1,7 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const articleController = require('../controllers/articles.js');
+const authen = require('../middlewares/Authen');
 
-router.use('/articles', articleController);
+
+router.get('/articles', authen, articleController.getArticles);
+
+router.get('/articles/new', authen, articleController.getCreate);
+router.post('/articles', authen, articleController.createArticle);
 
 module.exports = router;

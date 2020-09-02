@@ -1,0 +1,23 @@
+extends ../../layout
+
+block title
+  title new article
+
+block content
+  h2 new article
+  br
+
+  form(method='post' action='/articles')
+    .title
+        label Title
+        br
+        input(name='title')
+
+    .desc
+        label Description
+        br
+        textarea(name="desc", cols="30", rows="10")
+    
+    .buttons
+        a(href='/articles') cancel
+        button(type='submit') submit
