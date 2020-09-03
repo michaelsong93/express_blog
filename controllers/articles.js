@@ -4,11 +4,21 @@ const models = require('../models');
 //     res.render('pages/articles')
 // }
 
+// CRUD
+// GET /articles — > List
+// GET /articles/new —> create article
+// POST /articles
+// GET /articles/:id —> detail 아티클 1개
+// GET /articles/:id/edit
+// PUT /articles/:id —> update
+// DELETE /article/:id
+
 // 목록페이지
 exports.getArticles =async function(req,res,next){
     const articles =await models.Article.findAll({
         include : models.User
     });
+    
     console.log(articles[0].User.name);
     
     res.render('pages/articles/index', {articles: articles});
