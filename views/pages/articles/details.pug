@@ -1,0 +1,23 @@
+extends ../../layout
+
+block title
+  title Detail
+
+block content
+  h2 Articles details
+  br
+  
+  form(method='post' action='/articles')
+    .title
+        label Title
+        br
+        //- input(name='title')
+
+    .desc
+        label Description
+        br
+        //- textarea(name="desc", cols="30", rows="10")
+    
+    .buttons
+        a(href='/articles') update
+        button(type='submit') delete

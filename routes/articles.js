@@ -9,4 +9,6 @@ router.get('/articles', authen, articleController.getArticles);
 router.get('/articles/new', authen, articleController.getCreate);
 router.post('/articles', authen, articleController.createArticle);
 
+router.get('/articles/details', authen, articleController.getDetail);
+
 module.exports = router;

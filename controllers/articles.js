@@ -47,4 +47,7 @@ exports.createArticle = async function(req,res,next){
     res.redirect('/articles');
 }
 
-// exports.getDetail = 
+//3. detail 페이지
+exports.getDetail = function(req,res,next){
+    res.render('pages/articles/details');
+}
