@@ -11,6 +11,11 @@ exports.login = passport.authenticate('local', {
     failureRedirect : '/login',
 });
 
+exports.logout = (req, res, next) => {
+    req.logout();
+    res.redirect('/login');
+}
+
 
 // exports.login = async function(req, res, next){
 //     const email = req.body.email;

@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
 
     Article.associate = (models) => {
         models.Article.belongsTo(models.User);
+        models.Article.hasMany(models.Comment);
         models.Article.belongsToMany(models.User, {through : "Like"});
     }
 

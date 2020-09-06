@@ -7,6 +7,7 @@ const passportConfig = require('./passport');
 const session = require("express-session");
 const flash = require("connect-flash");
 const moment = require('moment');
+const methodOverride = require('method-override');
 
 module.exports = (app) => {
     app.use(logger('dev'));
@@ -23,6 +24,7 @@ module.exports = (app) => {
     app.use(passport.initialize());
     app.use(passport.session());
     passportConfig(passport);
+    app.use(methodOverride('_method'));
     app.use(function(req,res,next){
         res.locals.currentUser = req.user;
         res.locals.moment = moment;

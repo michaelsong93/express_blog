@@ -4,7 +4,7 @@ const defaultRouter = require('./default');
 const articlesRouter = require('./articles');
 /* GET home page. */
 router.use('/', defaultRouter);
-router.use('/', articlesRouter);
+router.use('/articles', articlesRouter);
 
 
 module.exports = router;

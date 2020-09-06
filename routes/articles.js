@@ -4,11 +4,14 @@ const articleController = require('../controllers/articles.js');
 const authen = require('../middlewares/Authen');
 
 
-router.get('/articles', authen, articleController.getArticles);
+router.get('/', authen, articleController.getArticles);
 
-router.get('/articles/new', authen, articleController.getCreate);
-router.post('/articles', authen, articleController.createArticle);
+router.get('/new', authen, articleController.getCreate);
+router.post('/', authen, articleController.createArticle);
 
-router.get('/articles/details', authen, articleController.getDetail);
+router.get('/:id', authen, articleController.getDetail);
+router.post('/:id/comments', authen, articleController.postComment);
 
+router.get('/:id/edit', authen, articleController.getEdit);
+router.put('/:id', authen, articleController.update);
 module.exports = router;

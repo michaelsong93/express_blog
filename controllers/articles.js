@@ -48,6 +48,50 @@ exports.createArticle = async function(req,res,next){
 }
 
 //3. detail 페이지
-exports.getDetail = function(req,res,next){
-    res.render('pages/articles/details');
+exports.getDetail = async function(req,res,next){
+    const id = req.params.id;
+    try{
+        const article = await models.Article.findByPk(id, {
+            include : [{
+                model : models.Comment,
+                include : models.User
+            }, {
+                model : models.User
+            }]
+        });
+        if(!article) throw new Error('article not found');
+        // const article = await models.Article.findOne({
+        //     where : {},
+        //     include : models.Comment
+        // })
+        // const comments = await models.Comment.findAll({where : {ArticleId : id}});
+        // const comments = await article.getComments();
+        res.render('pages/articles/details', {article});
+    } catch(err){
+        next(err);
+    }
+}
+
+//database 에 넣는 작업
+exports.postComment = async function(req,res,next){
+    const user = req.user;
+    const id = req.params.id; // article 의 아이디
+    const {content} = req.body;
+
+    await models.Comment.create({
+        content, 
+        ArticleId : id, 
+        UserId : user.id
+    });
+    res.redirect(`/articles/${id}`);
+
+}
+
+exports.getEdit = async function(req,res,next){
+    const article = await models.Article.findByPk(req.params.id);
+    res.render('pages/articles/edit', {article})
+}
+
+exports.update = async function(req,res,next){
+
 }
